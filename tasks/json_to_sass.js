@@ -53,7 +53,9 @@ var parseJSON = function (path, src) {
         var map = '$' + name + ':',
             json = JSON.stringify(obj);
 
-        map += json.replace(/((?!#).{1}|^.{0}){/g, '$1(')
+        map += json
+            .replace(/"([a-z0-9#]+)"/g, '$1')
+            .replace(/((?!#).{1}|^.{0}){/g, '$1(')
             .replace(/\[/g, '(')
             .replace(/}(?!")/g, ')')
             .replace(/\]/g, ')');
