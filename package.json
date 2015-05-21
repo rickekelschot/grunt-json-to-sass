@@ -1,7 +1,7 @@
 {
   "name": "grunt-json-to-sass",
   "description": "Convert JSON files to SASS files",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/rickekelschot/grunt-json-to-sass",
   "author": {
     "name": "Rick Ekelschot",
