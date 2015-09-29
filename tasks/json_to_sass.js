@@ -64,6 +64,10 @@ var parseJSON = function (path, src) {
         map = fixSassStrings(map);
         map += ';';
 
+        if(map.match(/"([0-9a-zA-Z#(),.]+)( !)([a-z]+)"/)){
+          map = map.replace(/(")/g, '');
+        }
+
         return map;
     },
 
