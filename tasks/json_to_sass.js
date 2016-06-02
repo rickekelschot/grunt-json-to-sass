@@ -58,6 +58,7 @@ var parseJSON = function (path, src) {
             .replace(/((?!#).{1}|^.{0}){/g, '$1(')
             .replace(/\[/g, '(')
             .replace(/}(?=,|$|\n|})/g, ')')
+            .replace(/\}/g, ')');
             .replace(/\]/g, ')');
 
         map = fixColors(map);
