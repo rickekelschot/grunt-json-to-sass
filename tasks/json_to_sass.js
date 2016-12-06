@@ -51,15 +51,19 @@ var parseJSON = function (path, src) {
 
     createSassMap = function (name, obj) {
         var map = '$' + name + ':',
-            json = JSON.stringify(obj);
+            json = JSON.stringify(obj),
+            unQuote = /"([a-z0-9-#]+)"/g,
+            openingCurlyBrace = /((?!#).{1}|^.{0}){/g,
+            openingBlockQuote = /\[/g,
+            closingCurlyBrace = /}(?=,|$|\n|})/g,
+            closingBlockQoute = /\]/g;
 
         map += json
-            .replace(/"([a-z0-9#]+)"/g, '$1')
-            .replace(/((?!#).{1}|^.{0}){/g, '$1(')
-            .replace(/\[/g, '(')
-            .replace(/}(?=,|$|\n|})/g, ')')
-            .replace(/\}/g, ')');
-            .replace(/\]/g, ')');
+            .replace(unQuote, '$1')
+            .replace(openingCurlyBrace, '$1(')
+            .replace(openingBlockQuote, '(')
+            .replace(closingCurlyBrace, ')')
+            .replace(closingBlockQoute, ')');
 
         map = fixColors(map);
         map = fixSassStrings(map);
@@ -69,7 +73,7 @@ var parseJSON = function (path, src) {
     },
 
     fixColors = function (value) {
-        var mixinColors = new RegExp(/\"(rgb.+|hsl.+)\"/g),
+        var mixinColors = new RegExp(/\"(rgb.+?|hsl.+?)\"/g),
             hexColors = new RegExp(/\"(#[0-9a-fA-F]{3,6})\"/g);
 
         return value.replace(mixinColors, "$1")

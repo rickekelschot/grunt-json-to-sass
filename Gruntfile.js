@@ -30,22 +30,16 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     json_to_sass: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+        test: {
+            files: [
+                {
+                    src: [
+                        'test.json'
+                    ],
+                    dest: '_test.scss'
+                }
+            ]
         }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      }
     },
 
     // Unit tests.
